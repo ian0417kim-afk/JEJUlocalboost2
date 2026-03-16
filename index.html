@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>제주 로컬부스트 | Jeju LocalBoost | 济州本地精选</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Noto+Sans+SC:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand:#F2EDE4; --stone:#C4B5A0; --earth:#8B7355;
+    --deep:#3D2E20; --moss:#6B7C5C; --sea:#4A7A8A;
+    --cream:#FAF7F2; --text:#2A1F14; --gold:#D4A840;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--cream);color:var(--text);font-family:'Noto Serif KR',serif;}
+
+  /* HERO */
+  .hero{position:relative;height:100vh;min-height:600px;
+    background:linear-gradient(160deg,#2A3D35 0%,#1A2820 40%,#0D1F18 100%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+  .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.15;}
+  .hero-orb-1{width:600px;height:600px;background:#6B9E7A;top:-200px;right:-100px;}
+  .hero-orb-2{width:400px;height:400px;background:#4A7A8A;bottom:-100px;left:-50px;}
+  .hero-badge{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.9rem;
+    letter-spacing:0.3em;color:var(--stone);text-transform:uppercase;margin-bottom:1.5rem;
+    animation:fadeUp 1s ease both;}
+  .hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;
+    font-size:clamp(2.5rem,6vw,5rem);color:#F2EDE4;text-align:center;
+    line-height:1.1;letter-spacing:0.05em;animation:fadeUp 1s ease 0.2s both;}
+  .hero-sub-ko{font-family:'Noto Serif KR',serif;font-weight:300;
+    font-size:clamp(1rem,2.5vw,1.5rem);color:var(--stone);text-align:center;
+    letter-spacing:0.3em;margin-top:0.8rem;animation:fadeUp 1s ease 0.4s both;}
+  .hero-divider{width:60px;height:1px;background:var(--stone);margin:1.5rem auto;
+    animation:fadeUp 1s ease 0.6s both;}
+  .hero-desc{font-size:0.8rem;letter-spacing:0.2em;color:rgba(196,181,160,0.6);
+    text-align:center;animation:fadeUp 1s ease 0.8s both;}
+  .hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+    display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+    color:rgba(196,181,160,0.4);font-size:0.65rem;letter-spacing:0.2em;
+    animation:fadeUp 1s ease 1.2s both;}
+  .hero-scroll-line{width:1px;height:40px;
+    background:linear-gradient(to bottom,rgba(196,181,160,0.4),transparent);
+    animation:scrollLine 1.5s ease-in-out infinite;}
+  @keyframes scrollLine{0%,100%{opacity:1}50%{opacity:0.2}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  /* LANG BAR */
+  .lang-bar{background:var(--deep);padding:0.7rem 2rem;
+    display:flex;justify-content:flex-end;gap:0.8rem;align-items:center;}
+  .lang-btn{background:none;border:1px solid rgba(196,181,160,0.3);color:var(--stone);
+    padding:0.25rem 0.75rem;border-radius:2px;cursor:pointer;font-size:0.72rem;
+    letter-spacing:0.1em;transition:all 0.3s;font-family:inherit;}
+  .lang-btn.active,.lang-btn:hover{background:var(--earth);border-color:var(--earth);color:white;}
+
+  /* MAIN TABS (숙소/관광/맛집/체험) */
+  .main-nav{background:white;border-bottom:1px solid rgba(196,181,160,0.2);
+    position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,0.05);}
+  .main-tabs{display:flex;justify-content:center;gap:0;}
+  .main-tab{background:none;border:none;padding:1.2rem 2.5rem;cursor:pointer;
+    font-family:'Noto Serif KR',serif;font-size:0.9rem;color:var(--stone);
+    letter-spacing:0.1em;border-bottom:3px solid transparent;transition:all 0.3s;
+    display:flex;align-items:center;gap:0.5rem;}
+  .main-tab:hover{color:var(--earth);}
+  .main-tab.active{color:var(--deep);border-bottom-color:var(--earth);font-weight:600;}
+  .main-tab .tab-icon{font-size:1rem;}
+  .main-tab .tab-soon{font-size:0.6rem;background:var(--sand);color:var(--stone);
+    padding:0.1rem 0.4rem;border-radius:10px;letter-spacing:0;}
+
+  /* FILTER */
+  .filter-section{background:var(--cream);padding:1.5rem 2rem;
+    border-bottom:1px solid rgba(196,181,160,0.15);}
+  .filter-label{font-size:0.65rem;letter-spacing:0.3em;color:var(--stone);
+    text-transform:uppercase;margin-bottom:0.8rem;text-align:center;}
+  .filter-tabs{display:flex;gap:0.4rem;justify-content:center;flex-wrap:wrap;}
+  .filter-tab{background:none;border:1px solid var(--stone);color:var(--earth);
+    padding:0.4rem 1.2rem;border-radius:30px;cursor:pointer;font-size:0.8rem;
+    font-family:'Noto Serif KR',serif;transition:all 0.3s;}
+  .filter-tab.active,.filter-tab:hover{background:var(--deep);border-color:var(--deep);color:white;}
+
+  /* MAIN CONTENT */
+  .main{max-width:1400px;margin:0 auto;padding:3rem 2rem;}
+  .section-header{text-align:center;margin-bottom:2.5rem;}
+  .section-eyebrow{font-family:'Cormorant Garamond',serif;font-style:italic;
+    font-size:0.85rem;letter-spacing:0.3em;color:var(--moss);display:block;margin-bottom:0.4rem;}
+  .section-title{font-family:'Noto Serif KR',serif;font-weight:300;
+    font-size:1.6rem;color:var(--deep);letter-spacing:0.1em;}
+
+  /* GRID */
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.8rem;}
+
+  /* 숙소 카드 */
+  .stay-card{background:white;border-radius:4px;overflow:hidden;
+    box-shadow:0 4px 30px rgba(0,0,0,0.06);transition:transform 0.4s,box-shadow 0.4s;
+    display:flex;flex-direction:column;}
+  .stay-card:hover{transform:translateY(-6px);box-shadow:0 12px 50px rgba(0,0,0,0.12);}
+  .card-img{position:relative;height:200px;background:var(--sand);overflow:hidden;}
+  .card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s;}
+  .stay-card:hover .card-img img{transform:scale(1.05);}
+  .card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;
+    justify-content:center;background:linear-gradient(135deg,var(--sand),var(--stone));
+    color:white;font-size:2.5rem;}
+  .card-badge{position:absolute;top:0.8rem;left:0.8rem;background:rgba(61,46,32,0.85);
+    color:white;font-size:0.65rem;letter-spacing:0.15em;padding:0.25rem 0.7rem;
+    border-radius:2px;backdrop-filter:blur(4px);}
+  .card-rating{position:absolute;top:0.8rem;right:0.8rem;
+    background:rgba(255,255,255,0.95);color:var(--deep);font-size:0.75rem;
+    font-weight:600;padding:0.25rem 0.6rem;border-radius:2px;
+    display:flex;align-items:center;gap:0.2rem;}
+  .star{color:var(--gold);}
+  .card-body{padding:1.3rem;flex:1;display:flex;flex-direction:column;}
+  .card-type{font-size:0.65rem;letter-spacing:0.2em;color:var(--moss);
+    text-transform:uppercase;margin-bottom:0.4rem;}
+  .card-name{font-size:1rem;font-weight:600;color:var(--deep);
+    margin-bottom:0.4rem;line-height:1.3;}
+  .card-review{font-size:0.78rem;color:#888;line-height:1.5;
+    margin-bottom:0.8rem;flex:1;font-style:italic;}
+  .card-tags{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.8rem;}
+  .tag{background:var(--sand);color:var(--earth);font-size:0.63rem;
+    padding:0.2rem 0.5rem;border-radius:2px;}
+  .card-footer{display:flex;justify-content:space-between;align-items:center;
+    padding-top:0.8rem;border-top:1px solid var(--sand);}
+  .card-price{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--earth);}
+  .card-btn{background:var(--deep);color:white;border:none;padding:0.4rem 0.9rem;
+    border-radius:2px;font-size:0.7rem;letter-spacing:0.1em;cursor:pointer;
+    transition:background 0.3s;font-family:inherit;text-decoration:none;display:inline-block;}
+  .card-btn:hover{background:var(--earth);}
+
+  /* 관광코스 카드 */
+  .tour-card{background:white;border-radius:4px;overflow:hidden;
+    box-shadow:0 4px 30px rgba(0,0,0,0.06);transition:transform 0.4s,box-shadow 0.4s;}
+  .tour-card:hover{transform:translateY(-6px);box-shadow:0 12px 50px rgba(0,0,0,0.12);}
+  .tour-card-img{position:relative;height:180px;background:var(--sand);overflow:hidden;}
+  .tour-card-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.6s;}
+  .tour-card:hover .tour-card-img img{transform:scale(1.05);}
+  .tour-card-body{padding:1.3rem;}
+  .tour-category{font-size:0.62rem;letter-spacing:0.2em;color:var(--sea);
+    text-transform:uppercase;margin-bottom:0.4rem;}
+  .tour-name{font-size:1rem;font-weight:600;color:var(--deep);
+    margin-bottom:0.6rem;line-height:1.3;}
+  .tour-info{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-bottom:0.8rem;}
+  .tour-info-item{font-size:0.72rem;color:#777;display:flex;align-items:flex-start;gap:0.3rem;}
+  .tour-info-icon{font-size:0.75rem;flex-shrink:0;margin-top:0.05rem;}
+  .tour-tip{background:linear-gradient(135deg,#F0F7F0,#E8F4E8);border-left:3px solid var(--moss);
+    padding:0.6rem 0.8rem;border-radius:0 4px 4px 0;font-size:0.75rem;
+    color:var(--deep);line-height:1.5;margin-bottom:0.8rem;}
+  .tour-warning{background:linear-gradient(135deg,#FFF8F0,#FFF0E0);border-left:3px solid #E8A040;
+    padding:0.5rem 0.8rem;border-radius:0 4px 4px 0;font-size:0.72rem;
+    color:#8B5520;line-height:1.5;margin-bottom:0.8rem;}
+  .tour-footer{display:flex;justify-content:space-between;align-items:center;
+    padding-top:0.8rem;border-top:1px solid var(--sand);}
+  .tour-time{font-family:'Cormorant Garamond',serif;font-size:0.85rem;color:var(--stone);}
+
+  /* COMING SOON */
+  .coming-soon{text-align:center;padding:5rem 2rem;color:var(--stone);}
+  .coming-soon-icon{font-size:3rem;margin-bottom:1rem;}
+  .coming-soon h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+    font-weight:300;color:var(--earth);margin-bottom:0.5rem;}
+  .coming-soon p{font-size:0.85rem;letter-spacing:0.1em;}
+
+  /* LOADING */
+  .loading{text-align:center;padding:4rem;color:var(--stone);grid-column:1/-1;}
+  .loading-dot{display:inline-block;width:7px;height:7px;border-radius:50%;
+    background:var(--stone);margin:0 3px;animation:loadDot 1.2s ease-in-out infinite;}
+  .loading-dot:nth-child(2){animation-delay:0.2s}
+  .loading-dot:nth-child(3){animation-delay:0.4s}
+  @keyframes loadDot{0%,80%,100%{transform:scale(0.8);opacity:0.4}40%{transform:scale(1.2);opacity:1}}
+
+  footer{background:var(--deep);color:var(--stone);text-align:center;
+    padding:2.5rem 2rem;font-size:0.75rem;letter-spacing:0.1em;line-height:2;}
+
+  @media(max-width:768px){
+    .cards-grid{grid-template-columns:1fr}
+    .main{padding:2rem 1rem}
+    .main-tab{padding:1rem 1.2rem;font-size:0.8rem}
+    .main-tab .tab-text{display:none}
+  }
+
+  /* ===== SLIDE PANEL ===== */
+  .panel-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);
+    z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+  .panel-overlay.open{opacity:1;pointer-events:all;}
+
+  .slide-panel{position:fixed;top:0;right:-100%;width:min(520px,100vw);height:100vh;
+    background:var(--cream);z-index:1001;overflow-y:auto;
+    transition:right 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+    box-shadow:-10px 0 40px rgba(0,0,0,0.15);}
+  .slide-panel.open{right:0;}
+
+  .panel-close{position:sticky;top:0;z-index:10;background:var(--cream);
+    padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;
+    border-bottom:1px solid rgba(196,181,160,0.2);}
+  .panel-close-btn{background:none;border:none;font-size:1.2rem;cursor:pointer;
+    color:var(--stone);padding:0.3rem;transition:color 0.3s;}
+  .panel-close-btn:hover{color:var(--deep);}
+  .panel-close-title{font-size:0.7rem;letter-spacing:0.2em;color:var(--stone);text-transform:uppercase;}
+
+  .panel-imgs{position:relative;height:260px;overflow:hidden;background:var(--sand);}
+  .panel-imgs img{width:100%;height:100%;object-fit:cover;}
+  .panel-img-placeholder{width:100%;height:100%;display:flex;align-items:center;
+    justify-content:center;background:linear-gradient(135deg,var(--sand),var(--stone));
+    font-size:4rem;}
+
+  .panel-body{padding:1.5rem;}
+  .panel-region-badge{display:inline-block;background:var(--deep);color:white;
+    font-size:0.65rem;letter-spacing:0.15em;padding:0.25rem 0.7rem;
+    border-radius:2px;margin-bottom:0.8rem;}
+  .panel-name{font-size:1.4rem;font-weight:600;color:var(--deep);
+    margin-bottom:0.4rem;line-height:1.2;}
+  .panel-type{font-size:0.72rem;color:var(--moss);letter-spacing:0.15em;
+    text-transform:uppercase;margin-bottom:1rem;}
+  .panel-rating{display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;}
+  .panel-stars{color:var(--gold);font-size:1rem;letter-spacing:0.1rem;}
+  .panel-rating-text{font-size:0.8rem;color:var(--stone);}
+
+  .panel-divider{height:1px;background:rgba(196,181,160,0.3);margin:1.2rem 0;}
+
+  .panel-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;margin-bottom:1.2rem;}
+  .panel-info-item{background:white;border-radius:4px;padding:0.8rem;
+    border:1px solid rgba(196,181,160,0.15);}
+  .panel-info-label{font-size:0.62rem;letter-spacing:0.15em;color:var(--stone);
+    text-transform:uppercase;margin-bottom:0.3rem;}
+  .panel-info-value{font-size:0.82rem;color:var(--deep);font-weight:500;}
+
+  .panel-section-title{font-size:0.7rem;letter-spacing:0.2em;color:var(--earth);
+    text-transform:uppercase;margin-bottom:0.8rem;display:flex;align-items:center;gap:0.5rem;}
+  .panel-section-title::after{content:'';flex:1;height:1px;background:rgba(196,181,160,0.3);}
+
+  .panel-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.2rem;}
+
+  .panel-reviews{display:flex;flex-direction:column;gap:0.8rem;margin-bottom:1.2rem;}
+  .panel-review{background:white;border-radius:4px;padding:1rem;
+    border-left:3px solid var(--moss);font-size:0.8rem;color:var(--text);
+    line-height:1.6;font-style:italic;}
+  .panel-review::before{content:'"';font-size:1.5rem;color:var(--stone);
+    line-height:0;vertical-align:-0.4rem;margin-right:0.2rem;}
+
+  .panel-map{width:100%;height:200px;border-radius:4px;overflow:hidden;
+    margin-bottom:1.2rem;border:none;}
+
+  .panel-actions{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem;
+    position:sticky;bottom:0;background:var(--cream);
+    padding:1rem 0;border-top:1px solid rgba(196,181,160,0.2);}
+  .panel-btn{display:flex;align-items:center;justify-content:center;gap:0.5rem;
+    padding:0.8rem;border-radius:4px;font-size:0.8rem;letter-spacing:0.05em;
+    cursor:pointer;text-decoration:none;font-family:inherit;border:none;
+    transition:all 0.3s;font-weight:500;}
+  .panel-btn-call{background:var(--deep);color:white;}
+  .panel-btn-call:hover{background:var(--earth);}
+  .panel-btn-sms{background:white;color:var(--deep);border:1px solid var(--stone);}
+  .panel-btn-sms:hover{background:var(--sand);}
+  .panel-btn-map{background:var(--moss);color:white;grid-column:1/-1;}
+  .panel-btn-map:hover{opacity:0.85;}
+  .panel-btn-disabled{background:var(--sand);color:var(--stone);cursor:not-allowed;grid-column:1/-1;}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <p class="hero-badge">Jeju LocalBoost · 로컬부스트</p>
+  <h1 class="hero-title">Discover Jeju</h1>
+  <p class="hero-sub-ko" id="hero-sub">제주를 제대로 즐기는 방법</p>
+  <div class="hero-divider"></div>
+  <p class="hero-desc" id="hero-desc">STAY · EXPLORE · EAT · EXPERIENCE</p>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span>SCROLL</span></div>
+</section>
+
+<!-- LANG BAR -->
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('ko')">한국어</button>
+  <button class="lang-btn" onclick="setLang('en')">English</button>
+  <button class="lang-btn" onclick="setLang('zh')">中文</button>
+</div>
+
+<!-- MAIN TABS -->
+<nav class="main-nav">
+  <div class="main-tabs">
+    <button class="main-tab active" onclick="setMainTab('stay')" id="mtab-stay">
+      <span class="tab-icon">🏡</span>
+      <span class="tab-text" id="mtab-stay-text">감성숙소</span>
+    </button>
+    <button class="main-tab" onclick="setMainTab('tour')" id="mtab-tour">
+      <span class="tab-icon">🗺️</span>
+      <span class="tab-text" id="mtab-tour-text">관광코스</span>
+    </button>
+    <button class="main-tab" onclick="setMainTab('food')" id="mtab-food">
+      <span class="tab-icon">🍽️</span>
+      <span class="tab-text" id="mtab-food-text">맛집</span>
+    </button>
+    <button class="main-tab" onclick="setMainTab('exp')" id="mtab-exp">
+      <span class="tab-icon">🎯</span>
+      <span class="tab-text" id="mtab-exp-text">체험</span>
+      <span class="tab-soon" id="soon-exp">준비중</span>
+    </button>
+  </div>
+</nav>
+
+<!-- FILTER (숙소용) -->
+<div class="filter-section" id="stay-filter">
+  <p class="filter-label" id="filter-label">지역 선택</p>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterStay('all')"><span id="f-all">전체</span></button>
+    <button class="filter-tab" onclick="filterStay('공항근체')"><span id="f-airport">공항근처</span></button>
+    <button class="filter-tab" onclick="filterStay('제주서쪽')"><span id="f-west">제주 서쪽</span></button>
+    <button class="filter-tab" onclick="filterStay('제주동쪽')"><span id="f-east">제주 동쪽</span></button>
+    <button class="filter-tab" onclick="filterStay('서귀포')"><span id="f-south">서귀포</span></button>
+    <button class="filter-tab" onclick="filterStay('해수욕장')"><span id="f-beach">해수욕장</span></button>
+  </div>
+</div>
+
+<!-- 맛집 필터 -->
+<div class="filter-section" id="food-filter" style="display:none">
+  <p class="filter-label" id="food-filter-label">카테고리 선택</p>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterFood('all')"><span id="ff-all">전체</span></button>
+    <button class="filter-tab" onclick="filterFood('카페·디저트')"><span id="ff-cafe">카페·디저트</span></button>
+    <button class="filter-tab" onclick="filterFood('해산물')"><span id="ff-seafood">해산물</span></button>
+    <button class="filter-tab" onclick="filterFood('흑돼지')"><span id="ff-pork">흑돼지</span></button>
+    <button class="filter-tab" onclick="filterFood('향토음식')"><span id="ff-local">향토음식</span></button>
+  </div>
+</div>
+
+<!-- 관광코스 필터 -->
+<div class="filter-section" id="tour-filter" style="display:none">
+  <p class="filter-label" id="tour-filter-label">코스 선택</p>
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterTour('all')"><span id="tf-all">전체</span></button>
+    <button class="filter-tab" onclick="filterTour('동쪽')"><span id="tf-east">제주 동쪽</span></button>
+    <button class="filter-tab" onclick="filterTour('서쪽')"><span id="tf-west">제주 서쪽</span></button>
+    <button class="filter-tab" onclick="filterTour('서귀포')"><span id="tf-south">서귀포</span></button>
+    <button class="filter-tab" onclick="filterTour('오름')"><span id="tf-oreum">오름 투어</span></button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="section-header">
+    <span class="section-eyebrow" id="sec-eyebrow">Curated Stays</span>
+    <h2 class="section-title" id="sec-title">엄선된 제주 감성숙소</h2>
+  </div>
+  <div id="cards-grid" class="cards-grid">
+    <div class="loading"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>
+  </div>
+</main>
+
+<!-- SLIDE PANEL OVERLAY -->
+<div class="panel-overlay" id="panel-overlay" onclick="closePanel()"></div>
+
+<!-- SLIDE PANEL -->
+<div class="slide-panel" id="slide-panel">
+  <div class="panel-close">
+    <span class="panel-close-title" id="panel-close-label">상세정보</span>
+    <button class="panel-close-btn" onclick="closePanel()">✕</button>
+  </div>
+  <div class="panel-imgs" id="panel-imgs"></div>
+  <div class="panel-body">
+    <span class="panel-region-badge" id="panel-region"></span>
+    <h2 class="panel-name" id="panel-name"></h2>
+    <p class="panel-type" id="panel-type"></p>
+    <div class="panel-rating">
+      <span class="panel-stars" id="panel-stars"></span>
+      <span class="panel-rating-text" id="panel-rating-text"></span>
+    </div>
+    <div class="panel-info-grid" id="panel-info-grid"></div>
+    <div class="panel-divider"></div>
+    <p class="panel-section-title" id="panel-review-title">후기</p>
+    <div class="panel-reviews" id="panel-reviews"></div>
+    <div class="panel-divider"></div>
+    <p class="panel-section-title" id="panel-tags-title">태그</p>
+    <div class="panel-tags" id="panel-tags"></div>
+    <iframe class="panel-map" id="panel-map" src="" loading="lazy" allowfullscreen></iframe>
+    <div class="panel-actions" id="panel-actions"></div>
+  </div>
+</div>
+
+<footer>
+  <p>제주 로컬부스트 | Jeju LocalBoost | 济州本地精选</p>
+  <p style="margin-top:0.5rem;opacity:0.4">Stay · Explore · Eat · Experience</p>
+</footer>
+
+<script>
+// ===== 언어 데이터 =====
+const i18n = {
+  ko: {
+    heroSub:'제주를 제대로 즐기는 방법', heroDesc:'STAY · EXPLORE · EAT · EXPERIENCE',
+    mtabStay:'감성숙소', mtabTour:'관광코스', mtabFood:'맛집', mtabExp:'체험',
+    soonFood:'준비중', soonExp:'준비중',
+    filterLabel:'지역 선택', tourFilterLabel:'코스 선택',
+    fAll:'전체', fAirport:'공항근처', fWest:'제주 서쪽', fEast:'제주 동쪽', fSouth:'서귀포', fBeach:'해수욕장',
+    tfAll:'전체', tfEast:'제주 동쪽', tfWest:'제주 서쪽', tfSouth:'서귀포', tfOreum:'오름 투어',
+    stayEyebrow:'Curated Stays', stayTitle:'엄선된 제주 감성숙소',
+    tourEyebrow:'Local Insights', tourTitle:'후기 기반 제주 관광코스',
+    foodEyebrow:'Curated Food', foodTitle:'제주 맛집 가이드',
+    foodFilterLabel:'카테고리 선택',
+    ffAll:'전체', ffCafe:'카페·디저트', ffSeafood:'해산물', ffPork:'흑돼지', ffLocal:'향토음식',
+    mapBtn:'지도', detailBtn:'자세히 보기',
+    comingSoonSub:'곧 업데이트 됩니다',
+    tipLabel:'💡 꿀팁', warnLabel:'⚠️ 주의'
+  },
+  en: {
+    heroSub:'The real way to enjoy Jeju', heroDesc:'STAY · EXPLORE · EAT · EXPERIENCE',
+    mtabStay:'Stays', mtabTour:'Tours', mtabFood:'Food', mtabExp:'Activities',
+    soonFood:'Soon', soonExp:'Soon',
+    filterLabel:'Filter by Region', tourFilterLabel:'Select Course',
+    fAll:'All', fAirport:'Near Airport', fWest:'West Jeju', fEast:'East Jeju', fSouth:'Seogwipo', fBeach:'Beachside',
+    tfAll:'All', tfEast:'East Jeju', tfWest:'West Jeju', tfSouth:'Seogwipo', tfOreum:'Oreum Tour',
+    stayEyebrow:'Curated Stays', stayTitle:'Premium Private Stays in Jeju',
+    tourEyebrow:'Local Insights', tourTitle:'Review-Based Jeju Travel Guides',
+    foodEyebrow:'Curated Food', foodTitle:'Jeju Restaurant Guide',
+    foodFilterLabel:'Filter by Category',
+    ffAll:'All', ffCafe:'Cafe & Dessert', ffSeafood:'Seafood', ffPork:'Black Pork', ffLocal:'Local Cuisine',
+    mapBtn:'Map', detailBtn:'View Details',
+    comingSoonSub:'Check back soon for updates',
+    tipLabel:'💡 Tips', warnLabel:'⚠️ Note'
+  },
+  zh: {
+    heroSub:'体验真实的济州岛', heroDesc:'住宿 · 探索 · 美食 · 体验',
+    mtabStay:'精品民宿', mtabTour:'旅游路线', mtabFood:'美食', mtabExp:'体验活动',
+    soonFood:'即将上线', soonExp:'即将上线',
+    filterLabel:'按地区筛选', tourFilterLabel:'选择路线',
+    fAll:'全部', fAirport:'机场附近', fWest:'济州西部', fEast:'济州东部', fSouth:'西归浦', fBeach:'海边',
+    tfAll:'全部', tfEast:'济州东部', tfWest:'济州西部', tfSouth:'西归浦', tfOreum:'火山丘游',
+    stayEyebrow:'精选民宿', stayTitle:'济州精品独栋民宿',
+    tourEyebrow:'本地攻略', tourTitle:'基于真实评价的济州旅游路线',
+    foodEyebrow:'精选美食', foodTitle:'济州美食指南',
+    foodFilterLabel:'按类别筛选',
+    ffAll:'全部', ffCafe:'咖啡·甜点', ffSeafood:'海鲜', ffPork:'黑猪肉', ffLocal:'乡土料理',
+    mapBtn:'地图', detailBtn:'查看详情',
+    comingSoonSub:'敬请期待',
+    tipLabel:'💡 攻略', warnLabel:'⚠️ 注意'
+  }
+};
+
+let lang = 'ko';
+let mainTab = 'stay';
+let stayRegion = 'all';
+let tourRegion = 'all';
+let foodCategory = 'all';
+let allStays = [];
+let allTours = [];
+let allFoods = [];
+
+// ===== 언어 전환 =====
+function setText(id, val) {
+  const el = document.getElementById(id);
+  if (el) el.textContent = val;
+}
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
+  const activeBtn = document.querySelector(`.lang-btn[onclick="setLang('${l}')"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+  const t = i18n[l];
+
+  setText('hero-sub', t.heroSub);
+  setText('hero-desc', t.heroDesc);
+  setText('mtab-stay-text', t.mtabStay);
+  setText('mtab-tour-text', t.mtabTour);
+  setText('mtab-food-text', t.mtabFood);
+  setText('mtab-exp-text', t.mtabExp);
+  setText('soon-exp', t.soonExp);
+
+  setText('filter-label', t.filterLabel);
+  setText('f-all', t.fAll);
+  setText('f-airport', t.fAirport);
+  setText('f-west', t.fWest);
+  setText('f-east', t.fEast);
+  setText('f-south', t.fSouth);
+  setText('f-beach', t.fBeach);
+
+  setText('tour-filter-label', t.tourFilterLabel);
+  setText('tf-all', t.tfAll);
+  setText('tf-east', t.tfEast);
+  setText('tf-west', t.tfWest);
+  setText('tf-south', t.tfSouth);
+  setText('tf-oreum', t.tfOreum);
+
+  setText('food-filter-label', t.foodFilterLabel);
+  setText('ff-all', t.ffAll);
+  setText('ff-cafe', t.ffCafe);
+  setText('ff-seafood', t.ffSeafood);
+  setText('ff-pork', t.ffPork);
+  setText('ff-local', t.ffLocal);
+
+  renderCurrent();
+}
+
+// ===== 메인 탭 전환 =====
+function setMainTab(tab) {
+  mainTab = tab;
+  document.querySelectorAll('.main-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('mtab-'+tab).classList.add('active');
+  document.getElementById('stay-filter').style.display = tab==='stay' ? 'block' : 'none';
+  document.getElementById('tour-filter').style.display = tab==='tour' ? 'block' : 'none';
+  document.getElementById('food-filter').style.display = tab==='food' ? 'block' : 'none';
+  renderCurrent();
+}
+
+function renderCurrent() {
+  const t = i18n[lang];
+  if (mainTab==='stay') {
+    document.getElementById('sec-eyebrow').textContent = t.stayEyebrow;
+    document.getElementById('sec-title').textContent = t.stayTitle;
+    renderStays(getFilteredStays());
+  } else if (mainTab==='tour') {
+    document.getElementById('sec-eyebrow').textContent = t.tourEyebrow;
+    document.getElementById('sec-title').textContent = t.tourTitle;
+    renderTours(getFilteredTours());
+  } else if (mainTab==='food') {
+    document.getElementById('sec-eyebrow').textContent = t.foodEyebrow;
+    document.getElementById('sec-title').textContent = t.foodTitle;
+    renderFoods(getFilteredFoods());
+  } else if (mainTab==='exp') {
+    document.getElementById('sec-eyebrow').textContent = '';
+    document.getElementById('sec-title').textContent = '';
+    document.getElementById('cards-grid').innerHTML = `
+      <div class="coming-soon" style="grid-column:1/-1">
+        <div class="coming-soon-icon">🎯</div>
+        <h3>${t.expComingSoon}</h3>
+        <p>${t.comingSoonSub}</p>
+      </div>`;
+  }
+}
+
+// ===== 숙소 =====
+function filterStay(region) {
+  stayRegion = region;
+  document.querySelectorAll('#stay-filter .filter-tab').forEach(t=>t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  renderStays(getFilteredStays());
+}
+function getFilteredStays() {
+  if (stayRegion==='all') return allStays;
+  return allStays.filter(s=>s.sheet===stayRegion);
+}
+function getName(s) {
+  // 숙소 이름은 고유명사 — 한국어 그대로 유지
+  // 타입/지역/후기가 번역됨
+  return s.name;
+}
+function getReview(s) {
+  if (lang==='en' && s.reviewEN) return s.reviewEN;
+  if (lang==='zh' && s.reviewZH) return s.reviewZH;
+  return s.review;
+}
+function getStayType(type) {
+  const typeMap = {
+    en: {'독채펜션':'Private Villa','풀빌라':'Pool Villa','독채풀빌라':'Private Pool Villa',
+         '게스트하우스':'Guesthouse','민박':'Local Inn','펜션':'Pension',
+         '호텔':'Hotel','리조트':'Resort','스테이':'Stay','수박일소(B&B)':'B&B',
+         '스테이호텔':'Boutique Hotel','휴양주택(독채)':'Private House','감성숙소':'Sensory Stay'},
+    zh: {'독채펜션':'独栋别墅','풀빌라':'泳池别墅','독채풀빌라':'独栋泳池别墅',
+         '게스트하우스':'青年旅舍','민박':'民宿','펜션':'民宿',
+         '호텔':'酒店','리조트':'度假村','스테이':'精品住宿','수박일소(B&B)':'民宿',
+         '스테이호텔':'精品酒店','휴양주택(독채)':'独栋别墅','감성숙소':'感性民宿'}
+  };
+  if (lang==='en') return typeMap.en[type] || type;
+  if (lang==='zh') return typeMap.zh[type] || type;
+  return type;
+}
+function translateTag(tag) {
+  const tagMap = {
+    en: {'독채':'Private','풀빌라':'Pool Villa','노천탕':'Outdoor Bath','히노끼탕':'Hinoki Bath',
+         '감성':'Aesthetic','바다뷰':'Ocean View','오션뷰':'Ocean View','한라산뷰':'Hallasan View',
+         '바베큐':'BBQ','반려동물':'Pet Friendly','주차':'Parking','조식':'Breakfast',
+         '공항근체':'Near Airport','공항근처':'Near Airport','애월':'Aewol','협재':'Hyeopjae',
+         '한림':'Hallim','성산':'Seongsan','서귀포':'Seogwipo','감성인테리어':'Stylish Interior',
+         '복층':'Duplex','루프탑':'Rooftop','테라스':'Terrace','수영장':'Pool',
+         '풀옵션':'Fully Equipped','사우나':'Sauna','자쿠지':'Jacuzzi'},
+    zh: {'독채':'独栋','풀빌라':'泳池别墅','노천탕':'露天浴池','히노끼탕':'桧木浴',
+         '감성':'感性','바다뷰':'海景','오션뷰':'海景','한라산뷰':'汉拿山景',
+         '바베큐':'烧烤','반려동물':'宠物友好','주차':'停车','조식':'早餐',
+         '공항근체':'近机场','공항근처':'近机场','애월':'愛月','협재':'协在',
+         '한림':'翰林','성산':'城山','서귀포':'西归浦','감성인테리어':'风格装潢',
+         '복층':'复式','루프탑':'屋顶','테라스':'露台','수영장':'泳池',
+         '풀옵션':'设备齐全','사우나':'桑拿','자쿠지':'按摩浴缸'}
+  };
+  if (lang==='en') return tagMap.en[tag.trim()] || tag.trim();
+  if (lang==='zh') return tagMap.zh[tag.trim()] || tag.trim();
+  return tag.trim();
+}
+function getRegion(region) {
+  const regionMap = {
+    en: {'애월':'Aewol','한림':'Hallim','협재':'Hyeopjae','구좌':'Gujwa','성산':'Seongsan',
+         '서귀포':'Seogwipo','중문':'Jungmun','안덕':'Andeok','표선':'Pyoseon','조천':'Jocheon',
+         '대정':'Daejeong','남원':'Namwon','공항근처':'Near Airport','제주시':'Jeju City',
+         '연동':'Yeondong','노형':'Nohyeong','해안동':'Haeandong','고산':'Gosan'},
+    zh: {'애월':'愛月','한림':'翰林','협재':'协在','구좌':'旧左','성산':'城山',
+         '서귀포':'西归浦','중문':'中文','안덕':'安德','표선':'表善','조천':'朝天',
+         '대정':'大静','남원':'南元','공항근처':'机场附近','제주시':'济州市',
+         '연동':'涟洞','노형':'老衡','해안동':'海岸洞','고산':'高山'}
+  };
+  if (lang==='en') return regionMap.en[region] || region;
+  if (lang==='zh') return regionMap.zh[region] || region;
+  return region;
+}
+function renderStays(stays) {
+  const grid = document.getElementById('cards-grid');
+  const t = i18n[lang];
+  if (!stays || stays.length===0) {
+    grid.innerHTML=`<div class="loading" style="grid-column:1/-1">No results.</div>`;return;
+  }
+  grid.innerHTML = stays.map((s,i)=>{
+    const tags=(s.tags||'').split(',').filter(Boolean).slice(0,4);
+    const name=getName(s), review=getReview(s);
+    const type=getStayType(s.type), region=getRegion(s.region);
+    const imgHtml = s.photoUrl
+      ? `<img src="${s.photoUrl}" alt="${name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>🏡</div>'">`
+      : `<div class="card-img-placeholder">🏡</div>`;
+    return `<div class="stay-card" style="animation:fadeUp 0.5s ease ${i*0.07}s both">
+      <div class="card-img">${imgHtml}
+        <span class="card-badge">${region}</span>
+        ${s.rating?`<div class="card-rating"><span class="star">★</span>${s.rating}<small style="color:#aaa;font-size:0.65rem">(${s.reviews})</small></div>`:''}
+      </div>
+      <div class="card-body">
+        <p class="card-type">${type}</p>
+        <h3 class="card-name">${name}</h3>
+        ${review?`<p class="card-review">"${review}"</p>`:''}
+        <div class="card-tags">${tags.map(tg=>`<span class="tag">${translateTag(tg)}</span>`).join('')}</div>
+        <div class="card-footer">
+          <div class="card-price">${s.price||'-'}</div>
+          <span class="card-btn">${t.mapBtn} →</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('.stay-card').forEach((card,i)=>{
+    card.addEventListener('click', ()=> openStayPanelByIndex(i, stays));
+  });
+}
+
+// ===== 패널 기능 =====
+let currentPanelData = null;
+
+function openStayPanelByIndex(i, stays) {
+  const s = stays[i];
+  currentPanelData = s;
+  const t = i18n[lang];
+
+  // 이름
+  document.getElementById('panel-region').textContent = getRegion(s.region||'');
+  document.getElementById('panel-name').textContent = getName(s);
+  document.getElementById('panel-type').textContent = getStayType(s.type||'');
+  document.getElementById('panel-close-label').textContent = lang==='en'?'Details':lang==='zh'?'详细信息':'상세정보';
+  document.getElementById('panel-review-title').textContent = lang==='en'?'Reviews':lang==='zh'?'评价':'후기';
+  document.getElementById('panel-tags-title').textContent = lang==='en'?'Features':lang==='zh'?'特色':'특징';
+
+  // 평점
+  if (s.rating) {
+    const stars = Math.round(parseFloat(s.rating));
+    document.getElementById('panel-stars').textContent = '★'.repeat(stars) + '☆'.repeat(5-stars);
+    document.getElementById('panel-rating-text').textContent = `${s.rating} (${s.reviews}${lang==='en'?' reviews':lang==='zh'?'条评价':'개 후기'})`;
+  } else {
+    document.getElementById('panel-stars').textContent = '';
+    document.getElementById('panel-rating-text').textContent = '';
+  }
+
+  // 사진
+  const imgDiv = document.getElementById('panel-imgs');
+  imgDiv.innerHTML = s.photoUrl
+    ? `<img src="${s.photoUrl}" alt="${getName(s)}" onerror="this.parentElement.innerHTML='<div class=\\'panel-img-placeholder\\'>🏡</div>'">`
+    : `<div class="panel-img-placeholder">🏡</div>`;
+
+  // 정보 그리드
+  const infoLabels = {
+    ko: {addr:'주소', price:'가격대', phone:'전화', checkin:'체크인'},
+    en: {addr:'Address', price:'Price', phone:'Phone', checkin:'Check-in'},
+    zh: {addr:'地址', price:'价格', phone:'电话', checkin:'入住时间'}
+  };
+  const il = infoLabels[lang];
+  document.getElementById('panel-info-grid').innerHTML = `
+    <div class="panel-info-item"><div class="panel-info-label">${il.price}</div><div class="panel-info-value">${s.price||'-'}</div></div>
+    <div class="panel-info-item"><div class="panel-info-label">${il.checkin}</div><div class="panel-info-value">15:00 / 11:00</div></div>
+    <div class="panel-info-item" style="grid-column:1/-1"><div class="panel-info-label">${il.addr}</div><div class="panel-info-value">${s.address||'-'}</div></div>
+  `;
+
+  // 후기
+  const r1 = lang==='en'?s.review1EN:lang==='zh'?s.review1ZH:s.review1;
+  const r2 = lang==='en'?s.review2EN:lang==='zh'?s.review2ZH:s.review2;
+  const reviews = [r1,r2,getReview(s)].filter(r=>r&&r.trim()&&r!=='-');
+  document.getElementById('panel-reviews').innerHTML = reviews.length>0
+    ? [...new Set(reviews)].slice(0,3).map(r=>`<div class="panel-review">${r}</div>`).join('')
+    : `<div class="panel-review" style="font-style:normal;color:var(--stone)">${lang==='en'?'No reviews yet':lang==='zh'?'暂无评价':'후기 없음'}</div>`;
+
+  // 태그
+  const tags=(s.tags||'').split(',').filter(Boolean);
+  document.getElementById('panel-tags').innerHTML = tags.map(tg=>`<span class="tag">${tg.trim()}</span>`).join('');
+
+  // 구글맵
+  const mapSrc = s.address
+    ? `https://maps.google.com/maps?q=${encodeURIComponent(s.address)}&output=embed`
+    : '';
+  document.getElementById('panel-map').src = mapSrc;
+
+  // 버튼
+  const phone = s.phoneConfirmed||s.phone||'';
+  const callLabel = lang==='en'?'📞 Call':lang==='zh'?'📞 电话':'📞 전화문의';
+  const smsLabel = lang==='en'?'💬 Text':lang==='zh'?'💬 短信':'💬 문자문의';
+  const mapLabel = lang==='en'?'🗺️ View on Google Maps':lang==='zh'?'🗺️ 查看地图':'🗺️ 구글맵 보기';
+
+  let btnHtml = '';
+  if (phone && phone!=='-') {
+    btnHtml += `<a href="tel:${phone}" class="panel-btn panel-btn-call">${callLabel}</a>`;
+    btnHtml += `<a href="sms:${phone}" class="panel-btn panel-btn-sms">${smsLabel}</a>`;
+  } else {
+    btnHtml += `<span class="panel-btn panel-btn-disabled">${lang==='en'?'Contact via booking platform':lang==='zh'?'请通过预订平台联系':'예약 플랫폼으로 문의'}</span>`;
+  }
+  btnHtml += `<a href="${s.mapUrl||'#'}" target="_blank" class="panel-btn panel-btn-map">${mapLabel}</a>`;
+  document.getElementById('panel-actions').innerHTML = btnHtml;
+
+  // 패널 열기
+  document.getElementById('panel-overlay').classList.add('open');
+  document.getElementById('slide-panel').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePanel() {
+  document.getElementById('panel-overlay').classList.remove('open');
+  document.getElementById('slide-panel').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// ===== 관광코스 =====
+function filterTour(region) {
+  tourRegion = region;
+  document.querySelectorAll('#tour-filter .filter-tab').forEach(t=>t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  renderTours(getFilteredTours());
+}
+function getFilteredTours() {
+  if (tourRegion==='all') return allTours;
+  return allTours.filter(s=>s.region&&s.region.includes(tourRegion));
+}
+function getTourName(s) {
+  if (lang==='en' && s.nameEN) return s.nameEN;
+  if (lang==='zh' && s.nameZH) return s.nameZH;
+  return s.name;
+}
+function getTourTip(s) {
+  if (lang==='en' && s.tipEN) return s.tipEN;
+  if (lang==='zh' && s.tipZH) return s.tipZH;
+  return s.tip;
+}
+function getTourWarning(s) {
+  if (lang==='en' && s.warningEN) return s.warningEN;
+  if (lang==='zh' && s.warningZH) return s.warningZH;
+  return s.warning;
+}
+function getTourTime(s) {
+  if (lang==='en' && s.bestTimeEN) return s.bestTimeEN;
+  if (lang==='zh' && s.bestTimeZH) return s.bestTimeZH;
+  return s.bestTime;
+}
+function getTourFee(s) {
+  if (lang==='en' && s.feeEN) return s.feeEN;
+  if (lang==='zh' && s.feeZH) return s.feeZH;
+  return s.fee;
+}
+function renderTours(tours) {
+  const grid = document.getElementById('cards-grid');
+  const t = i18n[lang];
+  if (!tours || tours.length===0) {
+    grid.innerHTML=`<div class="loading" style="grid-column:1/-1">No results.</div>`;return;
+  }
+  grid.innerHTML = tours.map((s,i)=>{
+    const name=getTourName(s), tip=getTourTip(s);
+    const warning=getTourWarning(s), time=getTourTime(s), fee=getTourFee(s);
+    const imgHtml = s.photoUrl
+      ? `<img src="${s.photoUrl}" alt="${name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>🗺️</div>'">`
+      : `<div class="card-img-placeholder">🗺️</div>`;
+    return `<div class="tour-card" style="animation:fadeUp 0.5s ease ${i*0.07}s both">
+      <div class="tour-card-img">${imgHtml}
+        <span class="card-badge">${s.region||''}</span>
+      </div>
+      <div class="tour-card-body">
+        <p class="tour-category">${s.category||''}</p>
+        <h3 class="tour-name">${name}</h3>
+        <div class="tour-info">
+          <div class="tour-info-item"><span class="tour-info-icon">🕐</span>${time||''}</div>
+          <div class="tour-info-item"><span class="tour-info-icon">⏱️</span>${s.duration||''}</div>
+          <div class="tour-info-item"><span class="tour-info-icon">💰</span>${fee||''}</div>
+          <div class="tour-info-item"><span class="tour-info-icon">🅿️</span>${s.parking||''}</div>
+        </div>
+        ${tip?`<div class="tour-tip"><strong>${t.tipLabel}</strong> ${tip}</div>`:''}
+        ${warning?`<div class="tour-warning"><strong>${t.warnLabel}</strong> ${warning}</div>`:''}
+        <div class="tour-footer">
+          <span class="tour-time">📍 ${s.nearby||''}</span>
+          <a href="${s.mapUrl||'#'}" target="_blank" class="card-btn">${t.mapBtn}</a>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ===== 맛집 =====
+function filterFood(cat) {
+  foodCategory = cat;
+  document.querySelectorAll('#food-filter .filter-tab').forEach(t=>t.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+  renderFoods(getFilteredFoods());
+}
+function getFilteredFoods() {
+  if (foodCategory==='all') return allFoods;
+  return allFoods.filter(f=>f.category===foodCategory);
+}
+function getFoodName(f) {
+  if (lang==='en' && f.nameEN && f.nameEN!==f.name) return f.nameEN;
+  if (lang==='zh' && f.nameZH && f.nameZH!==f.name) return f.nameZH;
+  return f.name;
+}
+function getFoodCategory(f) {
+  const map = {
+    '카페·디저트': {en:'Cafe & Dessert', zh:'咖啡·甜点'},
+    '해산물': {en:'Seafood', zh:'海鲜'},
+    '흑돼지': {en:'Black Pork', zh:'黑猪肉'},
+    '향토음식': {en:'Local Cuisine', zh:'乡土料理'}
+  };
+  if (lang==='en') return map[f.category]?.en || f.category;
+  if (lang==='zh') return map[f.category]?.zh || f.category;
+  return f.category;
+}
+function renderFoods(foods) {
+  const grid = document.getElementById('cards-grid');
+  const t = i18n[lang];
+  if (!foods || foods.length===0) {
+    grid.innerHTML=`<div class="loading" style="grid-column:1/-1">No results.</div>`;return;
+  }
+  const catEmoji = {'카페·디저트':'☕','해산물':'🐟','흑돼지':'🐷','향토음식':'🍚'};
+  grid.innerHTML = foods.map((f,i)=>{
+    const name = getFoodName(f);
+    const cat = getFoodCategory(f);
+    const emoji = catEmoji[f.category]||'🍽️';
+    const tags = (f.tags||'').split(',').filter(Boolean).slice(0,3);
+    const imgHtml = f.photoUrl
+      ? `<img src="${f.photoUrl}" alt="${name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>${emoji}</div>'">`
+      : `<div class="card-img-placeholder">${emoji}</div>`;
+    return `<div class="stay-card" style="animation:fadeUp 0.5s ease ${i*0.05}s both;cursor:pointer" onclick="openFoodPanel(${i},allFoods)">
+      <div class="card-img">${imgHtml}
+        <span class="card-badge">${f.region||''}</span>
+        ${f.rating?`<div class="card-rating"><span class="star">★</span>${f.rating}<small style="color:#aaa;font-size:0.65rem">(${f.reviewCount})</small></div>`:''}
+      </div>
+      <div class="card-body">
+        <p class="card-type">${cat}</p>
+        <h3 class="card-name">${name}</h3>
+        <p class="card-review" style="font-size:0.75rem;color:var(--stone);margin-bottom:0.5rem">📍 ${f.region||''}</p>
+        <div class="card-tags">${tags.map(tg=>`<span class="tag">${tg.trim()}</span>`).join('')}</div>
+        <div class="card-footer">
+          <div class="card-price">${f.price||''}</div>
+          <span class="card-btn">${t.mapBtn} →</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openFoodPanel(i, foods) {
+  const f = foods[i];
+  const t = i18n[lang];
+  const catEmoji = {'카페·디저트':'☕','해산물':'🐟','흑돼지':'🐷','향토음식':'🍚'};
+
+  document.getElementById('panel-region').textContent = f.region||'';
+  document.getElementById('panel-name').textContent = getFoodName(f);
+  document.getElementById('panel-type').textContent = getFoodCategory(f);
+  document.getElementById('panel-close-label').textContent = lang==='en'?'Details':lang==='zh'?'详细信息':'상세정보';
+  document.getElementById('panel-review-title').textContent = lang==='en'?'Reviews':lang==='zh'?'评价':'후기';
+  document.getElementById('panel-tags-title').textContent = lang==='en'?'Features':lang==='zh'?'特色':'특징';
+
+  // 평점
+  if (f.rating) {
+    const stars = Math.round(parseFloat(f.rating));
+    document.getElementById('panel-stars').textContent = '★'.repeat(Math.min(stars,5)) + '☆'.repeat(Math.max(0,5-stars));
+    document.getElementById('panel-rating-text').textContent = `${f.rating} (${f.reviewCount}${lang==='en'?' reviews':lang==='zh'?'条评价':'개 후기'})`;
+  } else {
+    document.getElementById('panel-stars').textContent='';
+    document.getElementById('panel-rating-text').textContent='';
+  }
+
+  // 사진
+  const imgDiv = document.getElementById('panel-imgs');
+  const emoji = catEmoji[f.category]||'🍽️';
+  imgDiv.innerHTML = f.photoUrl
+    ? `<img src="${f.photoUrl}" alt="${getFoodName(f)}" onerror="this.parentElement.innerHTML='<div class=\\'panel-img-placeholder\\'>${emoji}</div>'">`
+    : `<div class="panel-img-placeholder">${emoji}</div>`;
+
+  // 정보 그리드
+  const il = {ko:{addr:'주소',price:'가격대',phone:'전화',cat:'카테고리'},
+               en:{addr:'Address',price:'Price',phone:'Phone',cat:'Category'},
+               zh:{addr:'地址',price:'价格',phone:'电话',cat:'类别'}}[lang];
+  document.getElementById('panel-info-grid').innerHTML = `
+    <div class="panel-info-item"><div class="panel-info-label">${il.cat}</div><div class="panel-info-value">${getFoodCategory(f)}</div></div>
+    <div class="panel-info-item"><div class="panel-info-label">${il.phone}</div><div class="panel-info-value">${f.phone||'-'}</div></div>
+    <div class="panel-info-item" style="grid-column:1/-1"><div class="panel-info-label">${il.addr}</div><div class="panel-info-value">${f.address||'-'}</div></div>
+  `;
+
+  // 후기 없으면 안내
+  document.getElementById('panel-reviews').innerHTML =
+    `<div class="panel-review" style="font-style:normal;color:var(--stone)">${lang==='en'?'Reviews coming soon':lang==='zh'?'评价即将上线':'후기 준비 중'}</div>`;
+
+  // 태그
+  const tags=(f.tags||'').split(',').filter(Boolean);
+  document.getElementById('panel-tags').innerHTML = tags.map(tg=>`<span class="tag">${tg.trim()}</span>`).join('');
+
+  // 지도
+  document.getElementById('panel-map').src = f.address
+    ? `https://maps.google.com/maps?q=${encodeURIComponent(f.address)}&output=embed` : '';
+
+  // 버튼
+  const callLabel = lang==='en'?'📞 Call':lang==='zh'?'📞 电话':'📞 전화문의';
+  const smsLabel = lang==='en'?'💬 Text':lang==='zh'?'💬 短信':'💬 문자문의';
+  const mapLabel = lang==='en'?'🗺️ View on Google Maps':lang==='zh'?'🗺️ 查看地图':'🗺️ 구글맵 보기';
+  let btnHtml = '';
+  if (f.phone && f.phone!=='-') {
+    btnHtml += `<a href="tel:${f.phone}" class="panel-btn panel-btn-call">${callLabel}</a>`;
+    btnHtml += `<a href="sms:${f.phone}" class="panel-btn panel-btn-sms">${smsLabel}</a>`;
+  } else {
+    btnHtml += `<span class="panel-btn panel-btn-disabled" style="grid-column:1/-1">${lang==='en'?'No phone number':lang==='zh'?'暂无电话':'전화번호 없음'}</span>`;
+  }
+  btnHtml += `<a href="${f.mapUrl||'#'}" target="_blank" class="panel-btn panel-btn-map">${mapLabel}</a>`;
+  document.getElementById('panel-actions').innerHTML = btnHtml;
+
+  document.getElementById('panel-overlay').classList.add('open');
+  document.getElementById('slide-panel').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+// ===== 구글 시트 연동 =====
+const SHEET_ID = '1a0xg586S3O1BVzv9wb_ozIU7VXwOy6e0Q3pEiXRM-Tc';
+const STAY_SHEETS = [
+  {name:'공항근체', gid:'1989393732'},
+  {name:'제주서쪽', gid:'586408597'},
+  {name:'제주동쪽', gid:'200090792'},
+  {name:'서귀포',   gid:'1946015364'},
+  {name:'해수욕장', gid:'1963903077'}
+];
+const TOUR_SHEETS = [
+  {name:'관광코스_동쪽', gid:''}
+];
+
+async function loadSheet(gid, sheetName) {
+  const url = gid
+    ? `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${gid}`
+    : `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${encodeURIComponent(sheetName)}`;
+  try {
+    const res = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]+)\)/)[1]);
+    return json.table.rows || [];
+  } catch(e) { console.error(sheetName, e); return []; }
+}
+
+async function loadAllStays() {
+  const results = await Promise.all(STAY_SHEETS.map(async sh => {
+    const rows = await loadSheet(sh.gid, sh.name);
+    return rows.slice(1).map(row => {
+      const c=row.c, v=i=>(c[i]&&c[i].v!=null)?String(c[i].v).trim():'';
+      return { sheet:sh.name, name:v(0), region:v(1), type:v(2), address:v(3),
+        phone:v(4), rating:v(5), reviews:v(6), review:v(7), tags:v(8),
+        price:v(9), photoUrl:v(10), mapUrl:v(11),
+        nameEN:v(12), nameZH:v(13), reviewEN:v(14), reviewZH:v(15),
+        review1:v(16), review2:v(17),
+        review1EN:v(18), review2EN:v(19),
+        review1ZH:v(20), review2ZH:v(21),
+        phoneConfirmed:v(22) };
+    }).filter(s=>s.name);
+  }));
+  const seen=new Set();
+  allStays = results.flat().filter(s=>{
+    if(seen.has(s.name))return false;seen.add(s.name);return true;
+  });
+}
+
+async function loadAllTours() {
+  const rows = await loadSheet('', '관광코스_동쪽');
+  allTours = rows.slice(1).map(row => {
+    const c=row.c, v=i=>(c[i]&&c[i].v!=null)?String(c[i].v).trim():'';
+    return {
+      name:v(0), region:v(1), category:v(2), address:v(3),
+      bestTime:v(4), duration:v(5), fee:v(6), parking:v(7),
+      tip:v(8), warning:v(9), nearby:v(10),
+      nameEN:v(11), nameZH:v(12), tipEN:v(13), tipZH:v(14),
+      mapUrl:v(15), photoUrl:v(16),
+      warningEN:v(17), warningZH:v(18),
+      bestTimeEN:v(19), bestTimeZH:v(20),
+      feeEN:v(21), feeZH:v(22)
+    };
+  }).filter(s=>s.name);
+}
+
+async function loadAllFoods() {
+  const rows = await loadSheet('', '맛집');
+  allFoods = rows.slice(1).map(row => {
+    const c=row.c, v=i=>(c[i]&&c[i].v!=null)?String(c[i].v).trim():'';
+    return {
+      name:v(0), region:v(1), category:v(2), address:v(3),
+      phone:v(4), photoUrl:v(5), lat:v(6), lng:v(7),
+      nameEN:v(8), nameZH:v(9), tags:v(10), price:v(11),
+      mapUrl:v(12), rating:v(13), reviewCount:v(14),
+      catEN:v(15), catZH:v(16)
+    };
+  }).filter(f=>f.name);
+}
+
+async function init() {
+  document.getElementById('cards-grid').innerHTML =
+    `<div class="loading"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>`;
+  await Promise.all([loadAllStays(), loadAllTours(), loadAllFoods()]);
+  renderCurrent();
+}
+
+init();
+</script>
+</body>
+</html>
